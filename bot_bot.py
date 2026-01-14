@@ -23,4 +23,13 @@ async def heh(ctx, count_heh = 5):
 async def sum(ctx, a = 0, b = 0):
     await ctx.send(int(a) + int(b))
 
+@bot.command()
+async def joined(ctx, member: discord.Member):
+    """Says when a member joined."""
+    # Joined at can be None in very bizarre cases so just handle that as well
+    if member.joined_at is None:
+        await ctx.send(f'{member} has no join date.')
+    else:
+        await ctx.send(f'{member} joined {discord.utils.format_dt(member.joined_at)}')
+
 bot.run(TOKEN)
